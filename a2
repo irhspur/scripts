@@ -1,0 +1,10 @@
+#!/bin/bash
+
+words=""
+
+for word in "$@";
+do
+	#echo $a
+	words=$words$word"2 "
+done
+echo $words | xclip -selection clipboard
