@@ -53,3 +53,8 @@ xrandr --output VGA-1 --auto --same-as DP-1
 for i in $(ls feats/); do num_lines=$(cat feats/$i | wc -l ); echo $i" "$num_lines >> ../logs/feat_count.log; done;
 awk '{print $2 " " $1}' ../logs/feat_count.log | uniq | sort -nr | grep -v "_"
 --------------------------------------------------------------------------------------------------------------------
+
+#---- Calculating total duration of all audio files in a folder ---------------------------------------------------
+tot=0; while read -r i; do tmp=0;  tmp=`ffprobe "$i" -show_format 2>/dev/null | grep "^duration" | cut -d '=' -f 2 | cut -d '.' -f 1`; if [ -n "$tmp" ]; then let tot+=$tmp; fi;    done < <(find . -type f -iname "*[.mp3,.wav]"); echo "Total duration: $(($tot/60)) minutes"
+#------------------------------------------------------------------------------------------------------------------
+
