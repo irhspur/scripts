@@ -1,0 +1,26 @@
+#!/bin/bash
+
+input="$1"
+# first_word=(${input//;/})
+array=( $input )
+output_filename=${array[0]}
+
+echo $output_filename
+
+if [ ! -d utt_analysis ]; then
+  mkdir -p utt_analysis;
+fi
+
+if [ ! -d utt_analysis/"$output_filename" ]; then
+  mkdir -p utt_analysis/"$output_filename";
+fi
+
+# output_wav=$2
+output_file="input.scm"
+echo "Input: "$input "Output: "$output_filename
+
+echo -e  "(voice_ku_ne_nab_clunits)\n(set! u1 (SynthText \""$input"\"))\n(utt.save.relation u1 'Token \"utt_analysis/"$output_filename"/"$output_filename".Token\")\n(utt.save.relation u1 'Unit \"utt_analysis/"$output_filename"/"$output_filename".Unit\")\n(utt.save.relation u1 'Word \"utt_analysis/"$output_filename"/"$output_filename".Word\")" > utt_analysis/"$output_filename"/utt_analysis.scm
+
+padsp $ESTDIR/../festival/bin/festival festvox/ku_ne_nab_clunits.scm -b "utt_analysis/$output_filename/utt_analysis.scm" && echo "Utt Analysis Files generated"
+
+find utt_analysis/$output_filename/$output_filename.* -type f -exec tail -vn +1 {} \; &> utt_analysis/"$output_filename"/merged_"$output_filename".txt

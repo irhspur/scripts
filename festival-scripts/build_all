@@ -1,0 +1,9 @@
+./bin/do_build build_prompts_waves
+./bin/make_labs prompt-wav/*
+./bin/do_build build_utts
+./bin/make_pm_wave wav/*
+./bin/make_pm_fix pm/*.pm
+./bin/make_mcep wav/*.wav
+./bin/do_build build_clunits
+ls -l ./festival/clunits/*.catalogue
+

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+input="$1"
+# first_word=(${input//;/})
+output_filename="$2"
+#for i in "$@"; do $input+=$i; done
+
+# output_wav=$2
+output_file="input.scm"
+echo "Input: "$input "Output: "$output_filename
+
+echo -e  "(voice_ku_ne_nab_clunits)\n(set! u1 (SynthText \""$input"\"))\n(utt.save.wave u1 \""$output_filename".wav\" \"wav\")" > input.scm
