@@ -1,0 +1,15 @@
+#!/bin/bash
+
+[ $# -eq 0 ] && { echo -e "Please supply input text.\nUsage: $0 input_text output_file[option]"; exit 1; }
+
+input="$1"
+# output=$2
+
+# [[ -z "$output" ]] && output_file="out" || output_file="$output"
+
+SECONDS=0
+./scripts/generate_scm "$input" "out"
+padsp $ESTDIR/../festival/bin/festival festvox/ku_ne_nab_clunits.scm -b "input.scm" && echo "Wave generated in out.wav file"
+duration=$SECONDS
+echo "$(($duration)) seconds elapsed."
+cvlc out.wav &
