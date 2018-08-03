@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ $# -eq 0  ]
+	then 
+		echo "Please supply the commit hash"
+fi
+
+git diff-tree --no-commit-id --name-status -r "$1"
