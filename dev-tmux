@@ -1,0 +1,3 @@
+#!/bin/sh
+
+tmux new-session -d 'dev' \; new-window 'npm start' \; new-window 'git repo'

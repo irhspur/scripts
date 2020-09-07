@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ $# -eq 0  ]
+	then 
+		echo "Please supply the build name"
+fi
+
+today=$(date +%Y-%m-%d_%H-%M)
+
+filename="$today-build-$1.zip"
+
+echo "Generating zip ... $filename"
+
+zip -r $filename build
+mv $filename /home/irhspur/Public/for-bikings/ 
